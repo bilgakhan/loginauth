@@ -27,6 +27,11 @@ class RegisterProvider extends ChangeNotifier {
     if (response is RegisterModel) {
       isLoading = false;
       await db.writeToDb(response.token.toString());
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        'home',
+        (route) => false,
+      );
       notifyListeners();
     } else {
       isLoading = false;

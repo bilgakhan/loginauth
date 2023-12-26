@@ -16,4 +16,9 @@ class AuthDb {
     await openBox();
     await authBox!.put('access_token', token);
   }
+
+  Future<void> deleteToken() async {
+    await openBox();
+    await authBox!.delete('access_token');
+  }
 }

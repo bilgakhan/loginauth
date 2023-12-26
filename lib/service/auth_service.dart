@@ -22,6 +22,7 @@ class AuthService {
       );
 
       if (response.statusCode == 201 || response.statusCode == 200) {
+        
         return RegisterModel.fromJson(response.data);
       } else {
         return response.statusMessage.toString();
