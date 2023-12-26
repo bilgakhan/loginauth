@@ -1,12 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:login_app/core/network/links.dart';
+import 'package:login_app/model/register_model.dart';
 
-class AuthUser {
-  Future<dynamic> registerUser() async {
+class AuthService {
+  Future<dynamic> registerUser({
+    String? fName,
+    String? lName,
+    required String login,
+    required String password,
+  }) async {
+    
     try {
-      Response response =
-          await Dio().post(LoginAppLinks.register);
+      Response response = await Dio().post(
+        LoginAppLinks.register,
+        data: {
+          "email": login,
+          "password": password,
+          "f_name": fName,
+          "l_name": lName,
+        },
+      );
+
       if (response.statusCode == 201 || response.statusCode == 200) {
+        return RegisterModel.fromJson(response.data);
       } else {
         return response.statusMessage.toString();
       }
